@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 )
@@ -43,12 +44,13 @@ func main() {
 func doSomethingInAFunctionalWay() Result[int] {
 	fmt.Println("doing something")
 	return Ok(42)
-	//use to test error case
-	//return Err(42, errors.New("blub"))
 }
 
 func doSomeMoreInAFunctionalWay(value int) Result[[]byte] {
 	fmt.Println("doing something more")
+	if value == 1 {
+		return Err([]byte(""), errors.New("blub"))
+	}
 	return Ok([]byte(strconv.Itoa(value)))
 }
 
